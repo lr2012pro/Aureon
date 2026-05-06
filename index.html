@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aureon — The Tongue of the Ancient World</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="rune-bg"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Voltic Apex Language Archive</p>
+      <h1 class="hero-title">AUREON</h1>
+      <p class="hero-subtitle">The Ancient Tongue — <em>Salmirenth</em></p>
+      <p class="hero-desc">Discover the language of an ancient world. Learn words, test your knowledge, and explore the full lexicon of Aureon.</p>
+      <div class="hero-cta">
+        <a href="#flashcards" class="btn-primary">Begin Learning</a>
+        <a href="#lexicon" class="btn-secondary">Browse Lexicon</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num" id="totalWords">0</span><span class="stat-label">Words</span></div>
+        <div class="stat-sep">·</div>
+        <div class="stat"><span class="stat-num">4</span><span class="stat-label">Categories</span></div>
+        <div class="stat-sep">·</div>
+        <div class="stat"><span class="stat-num">∞</span><span class="stat-label">Mastery</span></div>
+      </div>
+    </div>
+    <div class="scroll-hint">↓ vorael caeldrixend ↓</div>
+  </section>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <span class="nav-logo">Aureon</span>
+      <div class="nav-links">
+        <a href="#flashcards">Flashcards</a>
+        <a href="#quiz">Quiz</a>
+        <a href="#lexicon">Lexicon</a>
+        <a href="#progress">Progress</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- FLASHCARDS -->
+  <section id="flashcards">
+    <div class="section-header">
+      <span class="section-tag">01 — Orvithaeld</span>
+      <h2>Flashcard Study</h2>
+      <p>Flip each card to reveal the Aureon word or its meaning. Use the filter to practice specific categories.</p>
+    </div>
+
+    <div class="filter-bar">
+      <button class="filter-btn active" data-cat="all">All</button>
+      <button class="filter-btn" data-cat="Noun">Nouns</button>
+      <button class="filter-btn" data-cat="Verb">Verbs</button>
+      <button class="filter-btn" data-cat="Adjective">Adjectives</button>
+      <button class="filter-btn" data-cat="Number">Numbers</button>
+    </div>
+
+    <div class="flashcard-area">
+      <div class="card-counter"><span id="cardIndex">1</span> / <span id="cardTotal">1</span></div>
+      <div class="flashcard" id="flashcard" onclick="flipCard()">
+        <div class="card-inner" id="cardInner">
+          <div class="card-front">
+            <span class="card-category" id="cardCat">—</span>
+            <p class="card-aureon" id="cardAureon">Loading...</p>
+            <span class="card-hint">tap to reveal</span>
+          </div>
+          <div class="card-back">
+            <span class="card-category" id="cardCatBack">—</span>
+            <p class="card-meaning" id="cardMeaning">Loading...</p>
+            <span class="card-hint">tap to flip back</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-nav">
+        <button class="nav-btn" onclick="prevCard()">← Prev</button>
+        <button class="nav-btn shuffle" onclick="shuffleCards()">⇄ Shuffle</button>
+        <button class="nav-btn" onclick="nextCard()">Next →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <div class="section-header">
+      <span class="section-tag">02 — Quelornen</span>
+      <h2>Test Your Knowledge</h2>
+      <p>Choose the correct meaning for each Aureon word. Four options, one correct answer.</p>
+    </div>
+
+    <div class="quiz-container">
+      <div class="quiz-hud">
+        <div class="hud-item"><span id="quizScore">0</span><label>Score</label></div>
+        <div class="hud-item"><span id="quizStreak">0</span><label>Streak 🔥</label></div>
+        <div class="hud-item"><span id="quizTotal">0</span><label>Answered</label></div>
+        <div class="hud-item"><span id="quizAccuracy">—</span><label>Accuracy</label></div>
+      </div>
+
+      <div class="quiz-card" id="quizCard">
+        <p class="quiz-prompt">What does this Aureon word mean?</p>
+        <p class="quiz-word" id="quizWord">—</p>
+        <p class="quiz-pos" id="quizPos">—</p>
+        <div class="quiz-options" id="quizOptions"></div>
+        <div class="quiz-feedback" id="quizFeedback"></div>
+      </div>
+
+      <div class="quiz-controls">
+        <button class="btn-primary" onclick="startQuiz()" id="quizStartBtn">Start Quiz</button>
+        <div class="quiz-category-select">
+          <label>Category:</label>
+          <select id="quizCatSelect">
+            <option value="all">All Words</option>
+            <option value="Noun">Nouns</option>
+            <option value="Verb">Verbs</option>
+            <option value="Adjective">Adjectives</option>
+            <option value="Number">Numbers</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEXICON -->
+  <section id="lexicon">
+    <div class="section-header">
+      <span class="section-tag">03 — Threnovalith</span>
+      <h2>Full Lexicon</h2>
+      <p>Browse every word in the Aureon language archive. Search by word or meaning.</p>
+    </div>
+
+    <div class="lexicon-controls">
+      <div class="search-wrap">
+        <span class="search-icon">⌕</span>
+        <input type="text" id="lexiconSearch" placeholder="Search words or meanings…" oninput="filterLexicon()" />
+      </div>
+      <div class="lex-filters">
+        <button class="filter-btn active" data-lexcat="all" onclick="setLexCat(this,'all')">All</button>
+        <button class="filter-btn" data-lexcat="Noun" onclick="setLexCat(this,'Noun')">Nouns</button>
+        <button class="filter-btn" data-lexcat="Verb" onclick="setLexCat(this,'Verb')">Verbs</button>
+        <button class="filter-btn" data-lexcat="Adjective" onclick="setLexCat(this,'Adjective')">Adjectives</button>
+        <button class="filter-btn" data-lexcat="Number" onclick="setLexCat(this,'Number')">Numbers</button>
+      </div>
+    </div>
+
+    <div class="lexicon-grid" id="lexiconGrid"></div>
+  </section>
+
+  <!-- PROGRESS -->
+  <section id="progress">
+    <div class="section-header">
+      <span class="section-tag">04 — Orveldraken</span>
+      <h2>Your Progress</h2>
+      <p>Track how many words you have studied and your mastery across categories.</p>
+    </div>
+
+    <div class="progress-grid">
+      <div class="progress-card">
+        <div class="prog-ring-wrap">
+          <svg class="prog-ring" viewBox="0 0 120 120">
+            <circle class="ring-bg" cx="60" cy="60" r="50" />
+            <circle class="ring-fill" cx="60" cy="60" r="50" id="totalRing" />
+          </svg>
+          <div class="ring-label">
+            <span id="progPct">0%</span>
+            <small>Seen</small>
+          </div>
+        </div>
+        <h3>Words Studied</h3>
+        <p id="progWords">0 of 0</p>
+      </div>
+      <div class="progress-cats" id="progressCats"></div>
+    </div>
+
+    <div class="progress-actions">
+      <button class="btn-secondary" onclick="resetProgress()">Reset Progress</button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <p class="footer-logo">Aureon</p>
+      <p class="footer-sub">brevithal salmirenth — <em>love knowledge</em></p>
+      <p class="footer-credit">Voltic Apex Language Archive · <span id="footerYear"></span></p>
+    </div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
