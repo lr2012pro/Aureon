@@ -186,52 +186,131 @@ function updateQuizHUD() {
 
 // ══════════════════════════════════════════════════════════
 // LEXICON
+// optimized for 1000+ words
 // ══════════════════════════════════════════════════════════
+
 let lexCatActive = 'all';
+
+const lexState = {
+  filtered: [],
+  rendered: 0,
+  batchSize: 60,
+  searchTimer: null
+};
 
 function setLexCat(el, cat) {
   lexCatActive = cat;
-  document.querySelectorAll('.lex-filters .filter-btn').forEach(b => b.classList.remove('active'));
-  el.classList.add('active');
-  filterLexicon();
+  document.querySelectorAll('.lex-filters .filter-btn')
+    .forEach(b => b.classList.remove('active'));
+
+  if (el) el.classList.add('active');
+
+  rebuildLexicon();
 }
 
-function filterLexicon() {
-  const query = document.getElementById('lexiconSearch').value.toLowerCase().trim();
-  const grid = document.getElementById('lexiconGrid');
-  grid.innerHTML = '';
+function getLexFiltered() {
+  const input = document.getElementById('lexiconSearch');
+  const query = input ? input.value.toLowerCase().trim() : '';
 
-  const filtered = LEXICON.filter(w => {
+  return LEXICON.filter(w => {
     const matchCat = lexCatActive === 'all' || w.pos === lexCatActive;
-    const matchSearch = !query
-      || w.aureon.toLowerCase().includes(query)
-      || w.meaning.toLowerCase().includes(query);
+    const matchSearch =
+      !query ||
+      w.aureon.toLowerCase().includes(query) ||
+      w.meaning.toLowerCase().includes(query);
+
     return matchCat && matchSearch;
   });
+}
 
-  if (filtered.length === 0) {
-    grid.innerHTML = '<p style="color:var(--text-dim);font-style:italic;grid-column:1/-1;padding:2rem 0;">No words found.</p>';
+function rebuildLexicon() {
+  const grid = document.getElementById('lexiconGrid');
+  if (!grid) return;
+
+  grid.innerHTML = '';
+
+  lexState.filtered = getLexFiltered();
+  lexState.rendered = 0;
+
+  if (lexState.filtered.length === 0) {
+    grid.innerHTML =
+      '<p style="color:var(--text-dim);font-style:italic;grid-column:1/-1;padding:2rem 0;">No words found.</p>';
     return;
   }
 
-  filtered.forEach(word => {
+  renderNextLexBatch();
+}
+
+function renderNextLexBatch() {
+  const grid = document.getElementById('lexiconGrid');
+  if (!grid) return;
+
+  if (lexState.rendered >= lexState.filtered.length) return;
+
+  const end = Math.min(
+    lexState.rendered + lexState.batchSize,
+    lexState.filtered.length
+  );
+
+  const fragment = document.createDocumentFragment();
+
+  for (let i = lexState.rendered; i < end; i++) {
+    const word = lexState.filtered[i];
+
     const card = document.createElement('div');
     card.className = 'lex-card';
-    const seen = state.seenWords.has(word.aureon);
-    card.style.opacity = seen ? '1' : '0.7';
+
+    if (!state.seenWords.has(word.aureon)) {
+      card.style.opacity = '0.7';
+    }
+
     card.innerHTML = `
       <span class="lex-pos">${word.pos}</span>
       <div class="lex-aureon">${word.aureon}</div>
       <div class="lex-meaning">${word.meaning}</div>
     `;
-    grid.appendChild(card);
+
+    fragment.appendChild(card);
+  }
+
+  grid.appendChild(fragment);
+  lexState.rendered = end;
+}
+
+function handleLexScroll() {
+  const nearBottom =
+    window.innerHeight + window.scrollY >=
+    document.body.offsetHeight - 500;
+
+  if (nearBottom) {
+    renderNextLexBatch();
+  }
+}
+
+function setupLexiconSearch() {
+  const input = document.getElementById('lexiconSearch');
+  if (!input) return;
+
+  input.addEventListener('input', () => {
+    clearTimeout(lexState.searchTimer);
+
+    lexState.searchTimer = setTimeout(() => {
+      rebuildLexicon();
+    }, 120);
   });
 }
 
 function renderLexicon() {
-  filterLexicon();
+  setupLexiconSearch();
+  rebuildLexicon();
+
+  window.removeEventListener('scroll', handleLexScroll);
+  window.addEventListener('scroll', handleLexScroll);
 }
 
+function filterLexicon() {
+  rebuildLexicon();
+}
 // ══════════════════════════════════════════════════════════
 // PROGRESS
 // ══════════════════════════════════════════════════════════
