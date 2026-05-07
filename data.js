@@ -1,6 +1,6 @@
 // Aureon Language — Full Lexicon (1000+ words)
 const lexicon = [
-  // ── NATURE ──────────────────────────────────────────────────────────────
+  // ── NATURE ───────────────────────────────────────────────────────────────
   { word: "vorael", pos: "Noun", meaning: "Sun" },
   { word: "thiveln", pos: "Noun", meaning: "Water" },
   { word: "caendor", pos: "Noun", meaning: "Mountain" },
@@ -85,7 +85,7 @@ const lexicon = [
   { word: "ildruvond", pos: "Noun", meaning: "Fern" },
   { word: "solvaekorith", pos: "Noun", meaning: "Vine" },
 
-  // ── ANIMALS ─────────────────────────────────────────────────────────────
+  // ── ANIMALS ──────────────────────────────────────────────────────────────
   { word: "vurkaelon", pos: "Noun", meaning: "Wolf" },
   { word: "thivronath", pos: "Noun", meaning: "Eagle" },
   { word: "quelmarev", pos: "Noun", meaning: "Deer" },
@@ -210,7 +210,7 @@ const lexicon = [
   { word: "quelvorexith", pos: "Noun", meaning: "Tavern" },
   { word: "drenvaekond", pos: "Noun", meaning: "Dungeon" },
   { word: "ilvornithek", pos: "Noun", meaning: "Arena" },
-  { word: "solmaekorn", pos: "Noun", meaning: "Barracks" },
+  { word: "solmaekivon", pos: "Noun", meaning: "Barracks" },
   { word: "faervondrix", pos: "Noun", meaning: "Harbor" },
   { word: "thalvronaek", pos: "Noun", meaning: "Dock" },
   { word: "brevornikaek", pos: "Noun", meaning: "Warehouse" },
@@ -222,7 +222,7 @@ const lexicon = [
   { word: "ilvorvaeth", pos: "Noun", meaning: "Shrine" },
   { word: "caldvornek", pos: "Noun", meaning: "Tomb" },
   { word: "meldrivonth", pos: "Noun", meaning: "Cemetery" },
-  { word: "quelornixa", pos: "Noun", meaning: "Lighthouse" },
+  { word: "vurthiloth", pos: "Noun", meaning: "Lighthouse" },
   { word: "vurthivond", pos: "Noun", meaning: "Watchtower" },
   { word: "thalvorindok", pos: "Noun", meaning: "Gate" },
   { word: "brevakithor", pos: "Noun", meaning: "Wall" },
@@ -288,7 +288,7 @@ const lexicon = [
   { word: "ilvornixel", pos: "Noun", meaning: "Ecstasy" },
   { word: "quelthivond", pos: "Noun", meaning: "Serenity" },
 
-  // ── BODY PARTS ──────────────────────────────────────────────────────────
+  // ── BODY PARTS ───────────────────────────────────────────────────────────
   { word: "voraevith", pos: "Noun", meaning: "Eye" },
   { word: "thimralthe", pos: "Noun", meaning: "Ear" },
   { word: "caeldrixon", pos: "Noun", meaning: "Hand" },
@@ -332,7 +332,7 @@ const lexicon = [
   { word: "drenvakixor", pos: "Noun", meaning: "Kidney" },
   { word: "ilvakendron", pos: "Noun", meaning: "Brain" },
 
-  // ── FOOD / DRINK ─────────────────────────────────────────────────────────
+  // ── FOOD / DRINK ────────────────────────────────────────────────────────
   { word: "meldroneth", pos: "Noun", meaning: "Bread" },
   { word: "caervinalith", pos: "Noun", meaning: "Meat" },
   { word: "brevakendral", pos: "Noun", meaning: "Herb" },
@@ -391,7 +391,7 @@ const lexicon = [
   { word: "drenvakixon", pos: "Noun", meaning: "Emerald" },
   { word: "ilvakendrixond", pos: "Noun", meaning: "Diamond" },
 
-  // ── TIME ─────────────────────────────────────────────────────────────────
+  // ── TIME ──────────────────────────────────────────────────────────────────
   { word: "voraenil", pos: "Noun", meaning: "Morning" },
   { word: "thimranel", pos: "Noun", meaning: "Afternoon" },
   { word: "caeldorixa", pos: "Noun", meaning: "Evening" },
@@ -430,7 +430,7 @@ const lexicon = [
   { word: "drenvaekivoth", pos: "Noun", meaning: "Staff (weapon)" },
   { word: "ilvakendrixiv", pos: "Noun", meaning: "Whip" },
 
-  // ── NUMBERS ──────────────────────────────────────────────────────────────
+  // ── NUMBERS ───────────────────────────────────────────────────────────────
   { word: "vorae", pos: "Number", meaning: "One" },
   { word: "thimen", pos: "Number", meaning: "Two" },
   { word: "quelda", pos: "Number", meaning: "Three" },
@@ -447,7 +447,7 @@ const lexicon = [
   { word: "faevithvorn", pos: "Number", meaning: "Hundred" },
   { word: "queldarivond", pos: "Number", meaning: "Thousand" },
 
-  // ── ADJECTIVES ───────────────────────────────────────────────────────────
+  // ── ADJECTIVES ────────────────────────────────────────────────────────────
   { word: "vurmaeth", pos: "Adjective", meaning: "Red" },
   { word: "thiventh", pos: "Adjective", meaning: "Blue" },
   { word: "quelvarith", pos: "Adjective", meaning: "Green" },
@@ -552,7 +552,7 @@ const lexicon = [
   { word: "drenvakivaxivak", pos: "Adjective", meaning: "Invisible" },
   { word: "ilvakendrixaxak", pos: "Adjective", meaning: "Transparent" },
 
-  // ── VERBS ────────────────────────────────────────────────────────────────
+  // ── VERBS ──────────────────────────────────────────────────────────────────
   { word: "vuraen", pos: "Verb", meaning: "To run" },
   { word: "thivaelon", pos: "Verb", meaning: "To swim" },
   { word: "quelornen", pos: "Verb", meaning: "To speak" },
@@ -663,7 +663,7 @@ const lexicon = [
   { word: "brevakivaxivaxivaxond", pos: "Verb", meaning: "To endure" },
   { word: "quelornivaxivaxivaxond", pos: "Verb", meaning: "To perish" },
 
-  // ── PRONOUNS / GRAMMAR WORDS ─────────────────────────────────────────────
+  // ── PRONOUNS / GRAMMAR WORDS ───────────────────────────────────────────────
   { word: "vel", pos: "Pronoun", meaning: "I / Me" },
   { word: "thorn", pos: "Pronoun", meaning: "You (singular)" },
   { word: "queliv", pos: "Pronoun", meaning: "He / Him" },
@@ -682,7 +682,7 @@ const lexicon = [
   { word: "thalvorn", pos: "Pronoun", meaning: "Why" },
   { word: "brevaki", pos: "Pronoun", meaning: "How" },
 
-  // ── PREPOSITIONS / CONJUNCTIONS ──────────────────────────────────────────
+  // ── PREPOSITIONS / CONJUNCTIONS ────────────────────────────────────────────
   { word: "ven", pos: "Preposition", meaning: "In / Inside" },
   { word: "thrak", pos: "Preposition", meaning: "On / Upon" },
   { word: "quelath", pos: "Preposition", meaning: "Under / Beneath" },
@@ -697,24 +697,24 @@ const lexicon = [
   { word: "ilva", pos: "Preposition", meaning: "Toward" },
   { word: "vurna", pos: "Preposition", meaning: "Away from" },
   { word: "ak", pos: "Conjunction", meaning: "And" },
-  { word: "vel", pos: "Conjunction", meaning: "Or" },
+  { word: "velor", pos: "Conjunction", meaning: "Or" },
   { word: "neth", pos: "Conjunction", meaning: "But" },
   { word: "threk", pos: "Conjunction", meaning: "Because" },
-  { word: "queliv", pos: "Conjunction", meaning: "If" },
+  { word: "quelif", pos: "Conjunction", meaning: "If" },
   { word: "drevon", pos: "Conjunction", meaning: "So / Therefore" },
-  { word: "ilvorn", pos: "Conjunction", meaning: "Although" },
-  { word: "solvaek", pos: "Conjunction", meaning: "While" },
+  { word: "ilvorni", pos: "Conjunction", meaning: "Although" },
+  { word: "solvaeki", pos: "Conjunction", meaning: "While" },
   { word: "faernoth", pos: "Conjunction", meaning: "Until" },
   { word: "thalkiv", pos: "Conjunction", meaning: "Unless" },
 
-  // ── INTERJECTIONS ────────────────────────────────────────────────────────
+  // ── INTERJECTIONS ──────────────────────────────────────────────────────────
   { word: "vael", pos: "Interjection", meaning: "Yes" },
-  { word: "neth", pos: "Interjection", meaning: "No" },
+  { word: "nethi", pos: "Interjection", meaning: "No" },
   { word: "aevorn", pos: "Interjection", meaning: "Hello / Greetings" },
   { word: "solketh", pos: "Interjection", meaning: "Farewell" },
   { word: "queldrae", pos: "Interjection", meaning: "Thank you" },
   { word: "threnvik", pos: "Interjection", meaning: "Please" },
-  { word: "ilvorn", pos: "Interjection", meaning: "Sorry / Forgive me" },
+  { word: "sorven", pos: "Interjection", meaning: "Sorry / Forgive me" },
   { word: "caldru", pos: "Interjection", meaning: "Help!" },
   { word: "brevak", pos: "Interjection", meaning: "Beware!" },
   { word: "vornaek", pos: "Interjection", meaning: "Victory!" },
