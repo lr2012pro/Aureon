@@ -882,3 +882,10 @@ footer {
   .progress-card { min-width: unset; }
   .hero-cta { flex-direction: column; align-items: center; }
 }
+.lexicon-grid {
+  contain: layout paint;
+}
+
+.lex-card {
+  will-change: transform;
+}
