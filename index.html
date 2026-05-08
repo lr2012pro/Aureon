@@ -1,196 +1,268 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aureon — The Tongue of the Ancient World</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aureon — Language of the Ancient Realm</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <!-- HERO -->
-  <section id="hero">
-    <div class="rune-bg"></div>
-    <div class="hero-content">
-      <p class="hero-eyebrow">Voltic Apex Language Archive</p>
-      <h1 class="hero-title">AUREON</h1>
-      <p class="hero-subtitle">The Ancient Tongue — <em>Salmirenth</em></p>
-      <p class="hero-desc">Discover the language of an ancient world. Learn words, test your knowledge, and explore the full lexicon of Aureon.</p>
-      <div class="hero-cta">
-        <a href="#flashcards" class="btn-primary">Begin Learning</a>
-        <a href="#lexicon" class="btn-secondary">Browse Lexicon</a>
-      </div>
-      <div class="hero-stats">
-        <div class="stat"><span class="stat-num" id="totalWords">0</span><span class="stat-label">Words</span></div>
-        <div class="stat-sep">·</div>
-        <div class="stat"><span class="stat-num">4</span><span class="stat-label">Categories</span></div>
-        <div class="stat-sep">·</div>
-        <div class="stat"><span class="stat-num">∞</span><span class="stat-label">Mastery</span></div>
-      </div>
-    </div>
-    <div class="scroll-hint">↓ vorael caeldrixend ↓</div>
-  </section>
+  <!-- Particle Canvas -->
+  <canvas id="particles"></canvas>
 
-  <!-- NAV -->
-  <nav id="nav">
-    <div class="nav-inner">
-      <span class="nav-logo">Aureon</span>
-      <div class="nav-links">
-        <a href="#flashcards">Flashcards</a>
-        <a href="#quiz">Quiz</a>
-        <a href="#lexicon">Lexicon</a>
-        <a href="#progress">Progress</a>
-      </div>
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-logo">
+      <span class="rune">✦</span>
+      <span>Aureon</span>
+    </div>
+    <div class="nav-links">
+      <button class="nav-btn active" data-page="home">Home</button>
+      <button class="nav-btn" data-page="lexicon">Lexicon</button>
+      <button class="nav-btn" data-page="flashcards">Flashcards</button>
+      <button class="nav-btn" data-page="quiz">Quiz</button>
+      <button class="nav-btn" data-page="translate">Vertaal</button>
+    </div>
+    <div class="nav-score">
+      <span class="rune">⟡</span>
+      <span id="xp-display">0 XP</span>
     </div>
   </nav>
 
-  <!-- FLASHCARDS -->
-  <section id="flashcards">
-    <div class="section-header">
-      <span class="section-tag">01 — Orvithaeld</span>
-      <h2>Flashcard Study</h2>
-      <p>Flip each card to reveal the Aureon word or its meaning. Use the filter to practice specific categories.</p>
-    </div>
+  <!-- PAGES -->
 
-    <div class="filter-bar">
-      <button class="filter-btn active" data-cat="all">All</button>
-      <button class="filter-btn" data-cat="Noun">Nouns</button>
-      <button class="filter-btn" data-cat="Verb">Verbs</button>
-      <button class="filter-btn" data-cat="Adjective">Adjectives</button>
-      <button class="filter-btn" data-cat="Number">Numbers</button>
-    </div>
-
-    <div class="flashcard-area">
-      <div class="card-counter"><span id="cardIndex">1</span> / <span id="cardTotal">1</span></div>
-      <div class="flashcard" id="flashcard" onclick="flipCard()">
-        <div class="card-inner" id="cardInner">
-          <div class="card-front">
-            <span class="card-category" id="cardCat">—</span>
-            <p class="card-aureon" id="cardAureon">Loading...</p>
-            <span class="card-hint">tap to reveal</span>
+  <!-- HOME PAGE -->
+  <div id="page-home" class="page active">
+    <div class="hero">
+      <div class="hero-bg-text">AUREON</div>
+      <div class="hero-content">
+        <p class="hero-subtitle">De Taal van het Oude Rijk</p>
+        <h1 class="hero-title">Aureon</h1>
+        <p class="hero-desc">Beheers de magische taal van een vergeten beschaving. <br>Meer dan <strong>240 woorden</strong> verdeeld over 15 categorieën.</p>
+        <div class="hero-stats">
+          <div class="stat-box">
+            <span class="stat-num" id="stat-total">0</span>
+            <span class="stat-label">Woorden</span>
           </div>
-          <div class="card-back">
-            <span class="card-category" id="cardCatBack">—</span>
-            <p class="card-meaning" id="cardMeaning">Loading...</p>
-            <span class="card-hint">tap to flip back</span>
+          <div class="stat-box">
+            <span class="stat-num" id="stat-learned">0</span>
+            <span class="stat-label">Geleerd</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num" id="stat-streak">0</span>
+            <span class="stat-label">Streak</span>
+          </div>
+        </div>
+        <div class="hero-actions">
+          <button class="btn-primary" data-page="flashcards">Begin met Leren</button>
+          <button class="btn-ghost" data-page="lexicon">Bekijk Lexicon</button>
+        </div>
+      </div>
+
+      <div class="rune-ring">
+        <svg viewBox="0 0 300 300" class="rune-svg">
+          <circle cx="150" cy="150" r="130" fill="none" stroke="rgba(196,164,100,0.15)" stroke-width="1"/>
+          <circle cx="150" cy="150" r="110" fill="none" stroke="rgba(196,164,100,0.1)" stroke-width="1" stroke-dasharray="4 8"/>
+          <text font-family="Cinzel" font-size="11" fill="rgba(196,164,100,0.4)" text-anchor="middle">
+            <textPath href="#ring-path">
+              VORAEL · OLVAREN · ZEPHKION · FAEROND · VELDRONIS · BREVAELON · SOLKETHIV · AUREMNIL ·
+            </textPath>
+          </text>
+          <defs>
+            <path id="ring-path" d="M150,150 m-120,0 a120,120 0 1,1 240,0 a120,120 0 1,1 -240,0"/>
+          </defs>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Category Cards -->
+    <div class="section">
+      <h2 class="section-title">Categorieën</h2>
+      <div class="category-grid" id="category-grid"></div>
+    </div>
+
+    <!-- Word of the Day -->
+    <div class="section">
+      <h2 class="section-title">Woord van de Dag</h2>
+      <div class="wotd-card" id="wotd"></div>
+    </div>
+  </div>
+
+  <!-- LEXICON PAGE -->
+  <div id="page-lexicon" class="page">
+    <div class="page-header">
+      <h1>Het Aureon Lexicon</h1>
+      <p>Alle woorden van de oude taal</p>
+    </div>
+    <div class="lexicon-controls">
+      <input type="text" id="search-input" placeholder="Zoek woord..." class="search-box">
+      <div class="filter-row" id="pos-filters">
+        <button class="filter-btn active" data-pos="All">Alle</button>
+        <button class="filter-btn" data-pos="Noun">Zelfstandig naamwoord</button>
+        <button class="filter-btn" data-pos="Verb">Werkwoord</button>
+        <button class="filter-btn" data-pos="Adjective">Bijvoeglijk naamwoord</button>
+        <button class="filter-btn" data-pos="Number">Getal</button>
+      </div>
+      <div class="filter-row" id="cat-filters"></div>
+    </div>
+    <div class="lexicon-table-wrap">
+      <table class="lexicon-table">
+        <thead>
+          <tr>
+            <th>Aureon</th>
+            <th>Engels</th>
+            <th>Woordsoort</th>
+            <th>Categorie</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="lexicon-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- FLASHCARDS PAGE -->
+  <div id="page-flashcards" class="page">
+    <div class="page-header">
+      <h1>Flashcards</h1>
+      <p>Klik op de kaart om te omdraaien</p>
+    </div>
+    <div class="flashcard-controls">
+      <select id="fc-category" class="select-box">
+        <option value="All">Alle categorieën</option>
+      </select>
+      <select id="fc-direction" class="select-box">
+        <option value="ae">Aureon → Engels</option>
+        <option value="ea">Engels → Aureon</option>
+      </select>
+      <button class="btn-primary" id="fc-shuffle">Shuffle</button>
+    </div>
+    <div class="fc-progress-bar"><div id="fc-progress-fill"></div></div>
+    <div class="fc-counter"><span id="fc-current">1</span> / <span id="fc-total">0</span></div>
+    <div class="flashcard-area">
+      <div class="flashcard" id="flashcard">
+        <div class="flashcard-inner">
+          <div class="flashcard-front">
+            <div class="card-label" id="fc-front-label">Aureon</div>
+            <div class="card-word" id="fc-front-word">—</div>
+            <div class="card-hint">Klik om te omdraaien</div>
+          </div>
+          <div class="flashcard-back">
+            <div class="card-label" id="fc-back-label">Engels</div>
+            <div class="card-word" id="fc-back-word">—</div>
+            <div class="card-pos" id="fc-back-pos"></div>
+            <div class="card-cat" id="fc-back-cat"></div>
           </div>
         </div>
       </div>
-      <div class="card-nav">
-        <button class="nav-btn" onclick="prevCard()">← Prev</button>
-        <button class="nav-btn shuffle" onclick="shuffleCards()">⇄ Shuffle</button>
-        <button class="nav-btn" onclick="nextCard()">Next →</button>
-      </div>
     </div>
-  </section>
-
-  <!-- QUIZ -->
-  <section id="quiz">
-    <div class="section-header">
-      <span class="section-tag">02 — Quelornen</span>
-      <h2>Test Your Knowledge</h2>
-      <p>Choose the correct meaning for each Aureon word. Four options, one correct answer.</p>
+    <div class="fc-buttons">
+      <button class="btn-wrong" id="fc-wrong">✗ Nog niet</button>
+      <button class="btn-prev" id="fc-prev">← Vorige</button>
+      <button class="btn-next" id="fc-next">Volgende →</button>
+      <button class="btn-correct" id="fc-correct">✓ Geweten</button>
     </div>
+    <div class="fc-session-stats">
+      <span class="stat-correct">✓ <span id="fc-s-correct">0</span></span>
+      <span class="stat-wrong">✗ <span id="fc-s-wrong">0</span></span>
+    </div>
+  </div>
 
-    <div class="quiz-container">
-      <div class="quiz-hud">
-        <div class="hud-item"><span id="quizScore">0</span><label>Score</label></div>
-        <div class="hud-item"><span id="quizStreak">0</span><label>Streak 🔥</label></div>
-        <div class="hud-item"><span id="quizTotal">0</span><label>Answered</label></div>
-        <div class="hud-item"><span id="quizAccuracy">—</span><label>Accuracy</label></div>
-      </div>
-
-      <div class="quiz-card" id="quizCard">
-        <p class="quiz-prompt">What does this Aureon word mean?</p>
-        <p class="quiz-word" id="quizWord">—</p>
-        <p class="quiz-pos" id="quizPos">—</p>
-        <div class="quiz-options" id="quizOptions"></div>
-        <div class="quiz-feedback" id="quizFeedback"></div>
-      </div>
-
-      <div class="quiz-controls">
-        <button class="btn-primary" onclick="startQuiz()" id="quizStartBtn">Start Quiz</button>
-        <div class="quiz-category-select">
-          <label>Category:</label>
-          <select id="quizCatSelect">
-            <option value="all">All Words</option>
-            <option value="Noun">Nouns</option>
-            <option value="Verb">Verbs</option>
-            <option value="Adjective">Adjectives</option>
-            <option value="Number">Numbers</option>
+  <!-- QUIZ PAGE -->
+  <div id="page-quiz" class="page">
+    <div class="page-header">
+      <h1>Quiz</h1>
+      <p>Test jouw kennis van Aureon</p>
+    </div>
+    <div id="quiz-setup" class="quiz-setup">
+      <div class="setup-grid">
+        <div class="setup-card">
+          <h3>Categorie</h3>
+          <select id="quiz-category" class="select-box">
+            <option value="All">Alle categorieën</option>
+          </select>
+        </div>
+        <div class="setup-card">
+          <h3>Richting</h3>
+          <select id="quiz-direction" class="select-box">
+            <option value="ae">Aureon → Engels</option>
+            <option value="ea">Engels → Aureon</option>
+            <option value="random">Gemengd</option>
+          </select>
+        </div>
+        <div class="setup-card">
+          <h3>Aantal vragen</h3>
+          <select id="quiz-count" class="select-box">
+            <option value="10">10 vragen</option>
+            <option value="20" selected>20 vragen</option>
+            <option value="30">30 vragen</option>
+            <option value="all">Alle woorden</option>
           </select>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- LEXICON -->
-  <section id="lexicon">
-    <div class="section-header">
-      <span class="section-tag">03 — Threnovalith</span>
-      <h2>Full Lexicon</h2>
-      <p>Browse every word in the Aureon language archive. Search by word or meaning.</p>
+      <button class="btn-primary btn-large" id="quiz-start">Start Quiz</button>
     </div>
 
-    <div class="lexicon-controls">
-      <div class="search-wrap">
-        <span class="search-icon">⌕</span>
-        <input type="text" id="lexiconSearch" placeholder="Search words or meanings…" oninput="filterLexicon()" />
+    <div id="quiz-active" class="quiz-active" style="display:none">
+      <div class="quiz-top">
+        <div class="quiz-progress-text"><span id="q-current">1</span> / <span id="q-total">20</span></div>
+        <div class="quiz-score-live">Score: <span id="q-score">0</span></div>
       </div>
-      <div class="lex-filters">
-        <button class="filter-btn active" data-lexcat="all" onclick="setLexCat(this,'all')">All</button>
-        <button class="filter-btn" data-lexcat="Noun" onclick="setLexCat(this,'Noun')">Nouns</button>
-        <button class="filter-btn" data-lexcat="Verb" onclick="setLexCat(this,'Verb')">Verbs</button>
-        <button class="filter-btn" data-lexcat="Adjective" onclick="setLexCat(this,'Adjective')">Adjectives</button>
-        <button class="filter-btn" data-lexcat="Number" onclick="setLexCat(this,'Number')">Numbers</button>
+      <div class="quiz-progress-bar"><div id="q-progress-fill"></div></div>
+      <div class="quiz-question-card">
+        <div class="q-direction-label" id="q-dir-label">Wat is de Engelse betekenis van:</div>
+        <div class="q-word" id="q-word">—</div>
+      </div>
+      <div class="quiz-options" id="quiz-options"></div>
+    </div>
+
+    <div id="quiz-result" class="quiz-result" style="display:none">
+      <div class="result-icon" id="result-icon">🏆</div>
+      <h2 class="result-title" id="result-title">Voltooid!</h2>
+      <div class="result-score-big" id="result-score-big">0/0</div>
+      <div class="result-pct" id="result-pct">0%</div>
+      <div class="result-msg" id="result-msg"></div>
+      <div class="result-wrong-list" id="result-wrong-list"></div>
+      <div class="result-buttons">
+        <button class="btn-primary" id="quiz-retry">Opnieuw</button>
+        <button class="btn-ghost" id="quiz-back">Terug naar setup</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRANSLATE PAGE -->
+  <div id="page-translate" class="page">
+    <div class="page-header">
+      <h1>Vertaalwoordenboek</h1>
+      <p>Zoek woorden in beide richtingen</p>
+    </div>
+    <div class="translate-box">
+      <div class="translate-panel">
+        <label>Engels</label>
+        <input type="text" id="en-input" class="translate-input" placeholder="Typ een Engels woord...">
+        <div id="en-results" class="translate-results"></div>
+      </div>
+      <div class="translate-arrow">⇄</div>
+      <div class="translate-panel">
+        <label>Aureon</label>
+        <input type="text" id="ae-input" class="translate-input" placeholder="Typ een Aureon woord...">
+        <div id="ae-results" class="translate-results"></div>
       </div>
     </div>
 
-    <div class="lexicon-grid" id="lexiconGrid"></div>
-  </section>
-
-  <!-- PROGRESS -->
-  <section id="progress">
-    <div class="section-header">
-      <span class="section-tag">04 — Orveldraken</span>
-      <h2>Your Progress</h2>
-      <p>Track how many words you have studied and your mastery across categories.</p>
+    <div class="recent-section">
+      <h3>Recent opgezocht</h3>
+      <div id="recent-words" class="recent-words"></div>
     </div>
+  </div>
 
-    <div class="progress-grid">
-      <div class="progress-card">
-        <div class="prog-ring-wrap">
-          <svg class="prog-ring" viewBox="0 0 120 120">
-            <circle class="ring-bg" cx="60" cy="60" r="50" />
-            <circle class="ring-fill" cx="60" cy="60" r="50" id="totalRing" />
-          </svg>
-          <div class="ring-label">
-            <span id="progPct">0%</span>
-            <small>Seen</small>
-          </div>
-        </div>
-        <h3>Words Studied</h3>
-        <p id="progWords">0 of 0</p>
-      </div>
-      <div class="progress-cats" id="progressCats"></div>
-    </div>
+  <!-- Toast Notification -->
+  <div id="toast" class="toast"></div>
 
-    <div class="progress-actions">
-      <button class="btn-secondary" onclick="resetProgress()">Reset Progress</button>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-inner">
-      <p class="footer-logo">Aureon</p>
-      <p class="footer-sub">brevithal salmirenth — <em>love knowledge</em></p>
-      <p class="footer-credit">Voltic Apex Language Archive · <span id="footerYear"></span></p>
-    </div>
-  </footer>
-
-  <script src="data.js"></script>
-  <script src="app.js"></script>
+  <script src="data/lexicon.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
